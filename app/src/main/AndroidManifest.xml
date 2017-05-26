@@ -16,11 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".CityConfirmationActivity">
+        <activity android:name=".CityConfirmationActivity"
+                  android:parentActivityName="com.intuition.weatherly.MainActivity">
         </activity>
-        <activity android:name=".WeatherDisplayActivity">
+        <activity android:name=".WeatherDisplayActivity"
+                  android:parentActivityName="com.intuition.weatherly.MainActivity">
         </activity>
-        <activity android:name=".RainForecastActivity">
+        <activity android:name=".RainForecastActivity"
+                  android:parentActivityName="com.intuition.weatherly.MainActivity">
         </activity>
     </application>
 
