@@ -8,4 +8,5 @@
     android:background="@drawable/gradient"
     tools:context="com.intuition.weatherly.WeatherDisplayActivity">
 
+
 </android.support.constraint.ConstraintLayout>

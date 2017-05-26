@@ -8,4 +8,29 @@
     android:background="@drawable/gradient"
     tools:context="com.intuition.weatherly.CityConfirmationActivity">
 
+    <ListView
+        android:id="@+id/cityListView"
+        android:layout_width="386dp"
+        android:layout_height="472dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintVertical_bias="0.695"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose a City:"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="59dp"/>
+
 </android.support.constraint.ConstraintLayout>
