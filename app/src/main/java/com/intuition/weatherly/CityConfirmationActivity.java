@@ -50,7 +50,7 @@ public class CityConfirmationActivity extends AppCompatActivity {
                 Toast.makeText(CityConfirmationActivity.this, city + ", " + state, Toast.LENGTH_SHORT).show();
 
                 Intent intent  = new Intent(CityConfirmationActivity.this, WeatherDisplayActivity.class);
-                intent.putExtra("cityFinal", city + state);
+                intent.putExtra("cityFinal", city);
                 startActivity(intent);
             }
         });
