@@ -36,17 +36,22 @@ public class CityConfirmationActivity extends AppCompatActivity {
         mCityInputResult.setTypeface(pacifico);
         mChooseCityText.setTypeface(pacifico);
 
-        mCityListView.setAdapter(new CityArrayAdapter(this, android.R.layout.simple_list_item_1, possibleCities));
-
         Intent intent = getIntent();
-        String city = intent.getStringExtra("city");
+        final String city = intent.getStringExtra("city");
         mCityInputResult.setText(city);
+
+        mCityListView.setAdapter(new CityArrayAdapter(this, android.R.layout.simple_list_item_1, possibleCities, city));
 
         mCityListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String state = possibleCities[position].toString();
-                Toast.makeText(CityConfirmationActivity.this, "Portland " + state, Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(CityConfirmationActivity.this, city + ", " + state, Toast.LENGTH_SHORT).show();
+
+                Intent intent  = new Intent(CityConfirmationActivity.this, WeatherDisplayActivity.class);
+                intent.putExtra("cityFinal", city + state);
+                startActivity(intent);
             }
         });
 
