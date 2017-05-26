@@ -8,4 +8,10 @@
     android:background="@drawable/gradient"
     tools:context="com.intuition.weatherly.RainForecastActivity">
 
+    <ListView
+        android:id="@+id/rainListView"
+        android:layout_width="395dp"
+        android:layout_height="587dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp"/>
 </android.support.constraint.ConstraintLayout>

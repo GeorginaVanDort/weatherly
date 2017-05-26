@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WeatherDisplayActivity extends AppCompatActivity {
+public class WeatherDisplayActivity extends AppCompatActivity implements View.OnClickListener{
 
     @BindView(R.id.cityTextView) TextView mCityTextView;
     @BindView(R.id.temp_text_view) TextView mTempTextView;
@@ -32,5 +33,16 @@ public class WeatherDisplayActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String city = intent.getStringExtra("cityFinal");
         mCityTextView.setText(city);
+
+        mGetRainText.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mGetRainText) {
+            Intent intent  = new Intent(WeatherDisplayActivity.this, RainForecastActivity.class);
+            intent.putExtra("city", mCityTextView.getText().toString());
+            startActivity(intent);
+        }
     }
 }
