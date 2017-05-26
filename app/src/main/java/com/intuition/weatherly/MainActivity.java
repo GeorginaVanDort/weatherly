@@ -1,8 +1,10 @@
 package com.intuition.weatherly;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,7 +12,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     @BindView(R.id.appTitle) TextView mAppTitle;
     @BindView(R.id.enterCityText) TextView mEnterCityText;
@@ -26,8 +28,29 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Typeface pacifico = Typeface.createFromAsset(getAssets(),"fonts/pacifico.ttf");
         mAppTitle.setTypeface(pacifico);
+        mEnterCityText.setTypeface(pacifico);
+        mAddCityButton.setOnClickListener(this);
 
+    }
 
+    @Override
+    public void onClick(View v) {
+        if (v == mAddCityButton) {
+            String city = mCityInput.getText().toString();
 
+            if (city == null || city.isEmpty()) {
+                alertUser();
+            }
+            else {
+                Intent intent = new Intent(MainActivity.this, CityConfirmationActivity.class);
+                intent.putExtra("city", city);
+                startActivity(intent);
+            }
+        }
+    }
+
+    private void alertUser() {
+        AlertDialogFragment dialog = new AlertDialogFragment();
+        dialog.show(getFragmentManager(),"Input a City");
     }
 }
