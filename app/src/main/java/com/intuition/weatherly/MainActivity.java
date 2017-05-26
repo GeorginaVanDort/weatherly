@@ -25,22 +25,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Bind Views and set fonts//
         ButterKnife.bind(this);
         Typeface pacifico = Typeface.createFromAsset(getAssets(),"fonts/pacifico.ttf");
         mAppTitle.setTypeface(pacifico);
         mEnterCityText.setTypeface(pacifico);
+
+        //Set onclick listener//
         mAddCityButton.setOnClickListener(this);
 
     }
 
+    //Define onclick//
     @Override
     public void onClick(View v) {
         if (v == mAddCityButton) {
             String city = mCityInput.getText().toString();
 
+            //validate input//
             if (city == null || city.isEmpty()) {
                 alertUser();
             }
+
+            //get input and start next activity//
             else {
                 Intent intent = new Intent(MainActivity.this, CityConfirmationActivity.class);
                 intent.putExtra("city", city);
