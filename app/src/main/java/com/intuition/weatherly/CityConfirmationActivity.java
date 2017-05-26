@@ -20,8 +20,6 @@ public class CityConfirmationActivity extends AppCompatActivity {
             "New York", "Ohio", "Oregon", "Pennsylvania", "Tennessee", "Texas",
             "Victoria, Australia"};
 
-//    private String[] cityAlts = new String[] {"Portland Mills, PA", "Portlandville, NY"};
-
     @BindView(R.id.cityListView) ListView mCityListView;
     @BindView(R.id.chooseCityText) TextView mChooseCityText;
     @BindView(R.id.cityInputResult) TextView mCityInputResult;
@@ -31,6 +29,7 @@ public class CityConfirmationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_confirmation);
 
+        //Bind Views and set fonts//
         ButterKnife.bind(this);
         Typeface pacifico = Typeface.createFromAsset(getAssets(),"fonts/pacifico.ttf");
         mCityInputResult.setTypeface(pacifico);
@@ -42,13 +41,16 @@ public class CityConfirmationActivity extends AppCompatActivity {
 
         mCityListView.setAdapter(new CityArrayAdapter(this, android.R.layout.simple_list_item_1, possibleCities, city));
 
+        //Set onclick listener//
         mCityListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String state = possibleCities[position].toString();
 
+                //Alert User//
                 Toast.makeText(CityConfirmationActivity.this, city + ", " + state, Toast.LENGTH_SHORT).show();
 
+                //Start next activity//
                 Intent intent  = new Intent(CityConfirmationActivity.this, WeatherDisplayActivity.class);
                 intent.putExtra("cityFinal", city);
                 startActivity(intent);

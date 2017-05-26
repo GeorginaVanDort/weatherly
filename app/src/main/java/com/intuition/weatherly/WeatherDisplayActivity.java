@@ -23,6 +23,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_display);
 
+        //Bind Views and set fonts//
         ButterKnife.bind(this);
         Typeface pacifico = Typeface.createFromAsset(getAssets(),"fonts/pacifico.ttf");
         mCityTextView.setTypeface(pacifico);
@@ -30,13 +31,16 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         mGetRainText.setTypeface(pacifico);
         mTimeLabel.setTypeface(pacifico);
 
+        //Get data from intent//
         Intent intent = getIntent();
         String city = intent.getStringExtra("cityFinal");
         mCityTextView.setText(city);
 
+        //Set onclick listener//
         mGetRainText.setOnClickListener(this);
     }
 
+    //Define onclick//
     @Override
     public void onClick(View v) {
         if (v == mGetRainText) {
