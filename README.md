@@ -8,7 +8,7 @@ Users can input a City and will be taken to a mock confirmation activity that po
 
 The user is then presented with a mock-up of the current temperature and summary for the chosen city. This will be replaced with dynamic data from DarkSky next week.
 
-User can click on another link to veiw the rain forcast in 5-minute intervals (aslo a mock up at this stage).
+User can click on another link to view the rain forecast in 5-minute intervals (also a mock up at this stage).
 
 This App currently has the following features:
  
