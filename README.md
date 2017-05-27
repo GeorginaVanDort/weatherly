@@ -2,7 +2,7 @@
 
 Weekly Independent project for Android. Stage ONE.
 
-Welcome to the Weatherly App. At this stage this app is a bare-bones skeleton app that will be built apon in the coming weeks.
+Welcome to the Weatherly App. At this stage this app is a bare-bones skeleton app that will be built upon in the coming weeks.
 
 Users can input a City and will be taken to a mock confirmation activity that populates a list of possible cities based on input. This will eventually (hopefully) be achieved with Google Places Autocomplete.
 
