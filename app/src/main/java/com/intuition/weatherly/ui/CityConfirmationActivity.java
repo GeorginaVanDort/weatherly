@@ -1,4 +1,4 @@
-package com.intuition.weatherly;
+package com.intuition.weatherly.ui;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.intuition.weatherly.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,4 +1,4 @@
-package com.intuition.weatherly;
+package com.intuition.weatherly.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.intuition.weatherly.R;
 
 public class RainForecastAdapter extends BaseAdapter {
     private Context mContext;

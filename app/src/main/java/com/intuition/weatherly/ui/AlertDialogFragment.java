@@ -1,4 +1,4 @@
-package com.intuition.weatherly;
+package com.intuition.weatherly.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
