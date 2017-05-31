@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.intuition.weatherly.R;
+import com.intuition.weatherly.adapters.RainForecastAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

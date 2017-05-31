@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.intuition.weatherly.R;
+import com.intuition.weatherly.adapters.CityArrayAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

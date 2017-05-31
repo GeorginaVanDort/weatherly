@@ -1,4 +1,4 @@
-package com.intuition.weatherly.ui;
+package com.intuition.weatherly.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
