@@ -12,9 +12,6 @@ import com.intuition.weatherly.R;
 import com.intuition.weatherly.models.WeatherForecast;
 import com.intuition.weatherly.services.ForecastService;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 
 import butterknife.BindView;
@@ -27,7 +24,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
 
     public static final String TAG = WeatherDisplayActivity.class.getSimpleName();
 
-    private WeatherForecast mCurrentWeather;
+    private WeatherForecast mForecast;
 
     @BindView(R.id.cityTextView) TextView mCityTextView;
     @BindView(R.id.temp_text_view) TextView mTempTextView;
@@ -51,7 +48,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         //Get data from intent//
         Intent intent = getIntent();
         String city = intent.getStringExtra("cityFinal");
-        mCityTextView.setText(city);
+        mCityTextView.setText("Portland");
 
         //Make api call//
         Double latitude = 45.5208;
@@ -67,24 +64,19 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 //Process Response Data//
-                try {
-                    String jsonData = response.body().string();
-                    Log.v(TAG, jsonData);
-                    if (response.isSuccessful()) {
-                        getCurrentDetails(jsonData);
+                mForecast = ForecastService.processResults(response);
+                Log.v("HOIY!", mForecast.getSummary() + "");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTempTextView.setText(mForecast.getTemp());
+                        mSummaryText.setText(mForecast.getSummary());
+                        mTimeLabel.setText(mForecast.getRealTime());
                     }
-                    else {
-                        Log.e(TAG, "error");
-                    }
-                }
-                catch (IOException e) {
-                    Log.e(TAG, "Exception caught: ", e);
-                }
-                catch (JSONException e) {
-                    Log.e(TAG, "Exception caught: ", e);
-                }
+                });
             }
         });
+
 
         //Set onclick listener//
         mGetRainText.setOnClickListener(this);
@@ -100,12 +92,4 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         }
     }
 
-    private void getCurrentDetails(String jsonData) throws JSONException {
-        JSONObject forecast = new JSONObject(jsonData);
-        String timezone = forecast.getString("timezone");
-        Log.v(TAG, "From JSON: " + timezone);
-        JSONObject currently = forecast.getJSONObject("currently");
-        String summary = currently.getString("summary");
-        Log.v(TAG, summary);
-    }
 }

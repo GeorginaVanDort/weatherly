@@ -1,8 +1,12 @@
 package com.intuition.weatherly.models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 public class WeatherForecast {
     private String mIcon;
-    private String mTime;
+    private Long mTime;
     private String mTimeZone;
     private String mSummary;
     private Double mTemp;
@@ -18,12 +22,21 @@ public class WeatherForecast {
         this.mIcon = mIcon;
     }
 
-    public String getTime() {
+    public Long getTime() {
         return mTime;
     }
 
-    public void setTime(String mTime) {
+    public void setTime(Long mTime) {
         this.mTime = mTime;
+    }
+
+    public String getRealTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat("h:mm");
+
+        formatter.setTimeZone(TimeZone.getTimeZone(getTimeZone()));
+        Date dateTime = new Date(getTime() * 1000);
+        String realTime = formatter.format(dateTime);
+        return realTime;
     }
 
     public String getTimeZone() {
@@ -42,24 +55,24 @@ public class WeatherForecast {
         this.mSummary = mSummary;
     }
 
-    public Double getTemp() {
-        return mTemp;
+    public String getTemp() {
+        return (int)Math.round(mTemp) + "";
     }
 
     public void setTemp(Double mTemp) {
         this.mTemp = mTemp;
     }
 
-    public Double getTempMax() {
-        return mTempMax;
+    public int getTempMax() {
+        return (int)Math.round(mTempMax);
     }
 
     public void setTempMax(Double mTempMax) {
         this.mTempMax = mTempMax;
     }
 
-    public Double getTempMin() {
-        return mTempMin;
+    public int getTempMin() {
+        return (int)Math.round(mTempMin);
     }
 
     public void setTempMin(Double mTempMin) {
