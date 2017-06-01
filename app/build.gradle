@@ -12,10 +12,12 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        buildTypes.each{
+            it.buildConfigField 'String', 'API_KEY', ApiKey
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "DARKSKY_API_KEY", DarkSkyAPIKey
         }
     }
 }
