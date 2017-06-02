@@ -28,8 +28,8 @@ public class RainForecastActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rain_forecast);
 
+        //Bind Views and set Font//
         ButterKnife.bind(this);
-
         mRainListView.setAdapter(new RainForecastAdapter(this, timeIntervals, rainSummary));
     }
 }

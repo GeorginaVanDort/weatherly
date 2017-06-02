@@ -47,23 +47,5 @@ public class RainForecast {
     private String setIcon(String precipType) {
         return null;
     }
-//    public void setPrecipType(String precipType) {
-//        mPrecipType = precipType;
-//    }
-//
-//
-//
-//    public void setTimeZone(String mTimeZone) {
-//        this.mTimeZone = mTimeZone;
-//    }
-//
-//    public void setTime(Long mTime) {
-//        this.mTime = mTime;
-//    }
-
-
-
-
-
 }
 

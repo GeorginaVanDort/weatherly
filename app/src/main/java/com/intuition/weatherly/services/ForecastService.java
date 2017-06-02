@@ -61,7 +61,6 @@ public class ForecastService {
 
                 //Calls method to parse response//
                 mWeatherForecast = parseForecast(forecast);
-                mRainForecasts = parseRain(forecast);
             }
 
             //Report Errors, catch exceptions//
@@ -83,59 +82,45 @@ public class ForecastService {
     //Parse JSON and set to Model//
     public static WeatherForecast parseForecast(JSONObject forecast) throws JSONException {
 
-        //Instantiate new Model//
-        WeatherForecast weatherForecast = new WeatherForecast();
-
         //Get Timezone//
-        weatherForecast.setTimeZone(forecast.getString("timezone"));
+        String timeZone = (forecast.getString("timezone"));
 
         //Drill into JSON "currently" object//
         JSONObject currently = forecast.getJSONObject("currently");
 
         //Set Model Vars//
-        weatherForecast.setSummary(currently.getString("summary"));
-        weatherForecast.setIcon(currently.getString("icon"));
-        weatherForecast.setTime(currently.getLong("time"));
-        weatherForecast.setTemp(currently.getDouble("temperature"));
+        String summary = (currently.getString("summary"));
+        String icon = (currently.getString("icon"));
+        Long time = (currently.getLong("time"));
+        Double temperature = (currently.getDouble("temperature"));
 
         //Drill into Daily Array and get Dailys//
         JSONArray dailyArray = forecast.getJSONObject("daily").getJSONArray("data");
-        weatherForecast.setTempMax(dailyArray.getJSONObject(0).getDouble("temperatureMax"));
-        weatherForecast.setTempMin(dailyArray.getJSONObject(0).getDouble("temperatureMin"));
-
-        return weatherForecast;
-    }
-
-    //Create Array of Rain Forecasts//
-    public static ArrayList<RainForecast> parseRain (JSONObject forecast) throws JSONException {
-
-        //Instantiate new Array//
-        ArrayList<RainForecast> rainForecasts = new ArrayList<>();
-
-        //Get timezone and Icon//
-        String timeZone = forecast.getString("timezone");
-        String icon = forecast.getJSONObject("minutely").getString("icon");
+        Double tempMax = (dailyArray.getJSONObject(0).getDouble("temperatureMax"));
+        Double tempMin = (dailyArray.getJSONObject(0).getDouble("temperatureMin"));
 
         //Get Minutely Array//
+        String rainIcon = forecast.getJSONObject("minutely").getString("icon");
         JSONArray minutely = forecast.getJSONObject("minutely").getJSONArray("data");
 
         //Loop through each //
+        ArrayList<RainForecast> rainForecasts = new ArrayList<>();
         for (int i = 0; i < minutely.length(); i+=5) {
             JSONObject rainForecastJSON = minutely.getJSONObject(i);
 
-            Long time = rainForecastJSON.getLong("time");
+            Long rainTime = rainForecastJSON.getLong("time");
             Double rainIntensity = rainForecastJSON.getDouble("precipIntensity");
 
-
-            //Construct Object//
-            RainForecast rainForecast = new RainForecast(time, timeZone, rainIntensity, icon);
+            //Construct Object and Push to Array//
+            RainForecast rainForecast = new RainForecast(rainTime, timeZone, rainIntensity, rainIcon);
             rainForecasts.add(rainForecast);
         }
-        Log.v("HGHHG", rainForecasts.toString());
-        return rainForecasts;
+
+        //Construct Forecast Object//
+        WeatherForecast weatherForecast = new WeatherForecast(time, timeZone, summary, temperature,
+                tempMax, tempMin, icon, rainForecasts);
+
+        return weatherForecast;
     }
-
-
-
 
 }

@@ -1,51 +1,42 @@
 package com.intuition.weatherly.models;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 
 public class WeatherForecast {
-    private String mIcon;
-    private Long mTime;
-    private String mTimeZone;
+    private String mRealTime;
     private String mSummary;
     private Double mTemp;
     private Double mTempMax;
     private Double mTempMin;
+    private String mIcon;
+    private ArrayList<RainForecast> mRainForecasts = new ArrayList<>();
 
 
-    public String getIcon() {
-        return mIcon;
+    public WeatherForecast(Long time, String timeZone, String summary,
+                           Double temp, Double tempMax, Double tempMin,
+                           String icon, ArrayList<RainForecast> rainForecasts) {
+
+        mRealTime = setRealTime(time, timeZone);
+        mSummary = summary;
+        mTemp = temp;
+        mTempMax = tempMax;
+        mTempMin = tempMin;
+        mIcon = icon;
+        mRainForecasts = rainForecasts;
     }
 
-    public void setIcon(String mIcon) {
-        this.mIcon = mIcon;
-    }
-
-    public Long getTime() {
-        return mTime;
-    }
-
-    public void setTime(Long mTime) {
-        this.mTime = mTime;
-    }
-
-    public String getRealTime() {
+    public String setRealTime(long time, String timeZone) {
         SimpleDateFormat formatter = new SimpleDateFormat("h:mm");
 
-        formatter.setTimeZone(TimeZone.getTimeZone(getTimeZone()));
-        Date dateTime = new Date(getTime() * 1000);
+        formatter.setTimeZone(TimeZone.getTimeZone(timeZone));
+        Date dateTime = new Date(time * 1000);
         String realTime = formatter.format(dateTime);
         return realTime;
     }
 
-    public String getTimeZone() {
-        return mTimeZone;
-    }
-
-    public void setTimeZone(String mTimeZone) {
-        this.mTimeZone = mTimeZone;
-    }
 
     public String getSummary() {
         return mSummary;
@@ -79,5 +70,15 @@ public class WeatherForecast {
         this.mTempMin = mTempMin;
     }
 
+    public String getRealTime() {
+        return mRealTime;
+    }
 
+    public String getIcon() {
+        return mIcon;
+    }
+
+    public ArrayList<RainForecast> getRainForecasts() {
+        return mRainForecasts;
+    }
 }
