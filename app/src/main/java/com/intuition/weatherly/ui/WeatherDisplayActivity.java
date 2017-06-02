@@ -41,7 +41,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     @BindView(R.id.getRainText) TextView mGetRainText;
     @BindView(R.id.timeLabel) TextView mTimeLabel;
     @BindView(R.id.degreesTextView) TextView mDegrees;
-    @BindView(R.id.rainIconView) ImageView mRainImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +54,12 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         Typeface lato = Typeface.createFromAsset(getAssets(),"fonts/lato.ttf");
         Typeface bubbler = Typeface.createFromAsset(getAssets(),"fonts/bubbler.ttf");
         Typeface latoh = Typeface.createFromAsset(getAssets(),"fonts/latoh.ttf");
+        Typeface weather = Typeface.createFromAsset(getAssets(),"fonts/weather.ttf");
+
+
         mCityTextView.setTypeface(bubbler);
         mSummaryText.setTypeface(latoh);
-        mGetRainText.setTypeface(latoh);
+        mGetRainText.setTypeface(weather);
         mTimeLabel.setTypeface(bubbler);
         mTempTextView.setTypeface(lato);
         mDegrees.setTypeface(lato);
