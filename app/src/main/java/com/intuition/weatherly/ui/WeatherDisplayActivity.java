@@ -2,6 +2,7 @@ package com.intuition.weatherly.ui;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     public static final String TAG = WeatherDisplayActivity.class.getSimpleName();
 
     private WeatherForecast mForecast;
+    Double mLatitude = 45.5208;
+    Double mLongitude = -122.6795;
 
     @BindView(R.id.cityTextView) TextView mCityTextView;
     @BindView(R.id.temp_text_view) TextView mTempTextView;
@@ -56,9 +59,8 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         mCityTextView.setText("Portland");
 
         //Make api call//
-        Double latitude = 45.5208;
-        Double longitude = -122.6795;
-        ForecastService.getForecast(latitude, longitude, new Callback() {
+
+        ForecastService.getForecast(mLatitude, mLongitude, new Callback() {
 
             //On Failure//
             @Override
@@ -84,6 +86,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
 
         //Set onclick listener//
         mGetRainText.setOnClickListener(this);
+        mCityTextView.setOnClickListener(this);
     }
 
     //Define onclick//
@@ -94,6 +97,13 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
             ArrayList<RainForecast> rainForecasts = mForecast.getRainForecasts();
             intent.putExtra("rain", Parcels.wrap(rainForecasts));
             startActivity(intent);
+        }
+        if (v == mCityTextView){
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("geo:" + mLatitude
+                            + "," + mLongitude
+                            ));
+            startActivity(mapIntent);
         }
     }
 
