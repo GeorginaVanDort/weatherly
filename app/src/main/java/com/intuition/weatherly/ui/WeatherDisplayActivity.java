@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.intuition.weatherly.R;
@@ -39,6 +40,8 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     @BindView(R.id.summaryText) TextView mSummaryText;
     @BindView(R.id.getRainText) TextView mGetRainText;
     @BindView(R.id.timeLabel) TextView mTimeLabel;
+    @BindView(R.id.degreesTextView) TextView mDegrees;
+    @BindView(R.id.rainIconView) ImageView mRainImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +51,21 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         //Bind Views and set fonts//
         ButterKnife.bind(this);
         Typeface pacifico = Typeface.createFromAsset(getAssets(),"fonts/pacifico.ttf");
-        mCityTextView.setTypeface(pacifico);
-        mSummaryText.setTypeface(pacifico);
-        mGetRainText.setTypeface(pacifico);
-        mTimeLabel.setTypeface(pacifico);
+        Typeface lato = Typeface.createFromAsset(getAssets(),"fonts/lato.ttf");
+        Typeface bubbler = Typeface.createFromAsset(getAssets(),"fonts/bubbler.ttf");
+        Typeface latoh = Typeface.createFromAsset(getAssets(),"fonts/latoh.ttf");
+        mCityTextView.setTypeface(bubbler);
+        mSummaryText.setTypeface(latoh);
+        mGetRainText.setTypeface(latoh);
+        mTimeLabel.setTypeface(bubbler);
+        mTempTextView.setTypeface(lato);
+        mDegrees.setTypeface(lato);
+
 
         //Get data from intent//
         Intent intent = getIntent();
         String city = intent.getStringExtra("cityFinal");
-        mCityTextView.setText("Portland");
+        mCityTextView.setText("PORTLAND");
 
         //Make api call//
 
