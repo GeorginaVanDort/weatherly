@@ -65,7 +65,6 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
             public void onResponse(Call call, Response response) throws IOException {
                 //Process Response Data//
                 mForecast = ForecastService.processResults(response);
-                Log.v("HOIY!", mForecast.getSummary() + "");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
