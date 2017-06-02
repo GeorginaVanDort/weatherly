@@ -2,6 +2,7 @@ package com.intuition.weatherly.ui;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,10 +10,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.intuition.weatherly.R;
+import com.intuition.weatherly.models.RainForecast;
 import com.intuition.weatherly.models.WeatherForecast;
 import com.intuition.weatherly.services.ForecastService;
 
+import org.parceler.Parcels;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -86,7 +91,8 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         if (v == mGetRainText) {
             Intent intent  = new Intent(WeatherDisplayActivity.this, RainForecastActivity.class);
-            intent.putExtra("city", mCityTextView.getText().toString());
+            ArrayList<RainForecast> rainForecasts = mForecast.getRainForecasts();
+            intent.putExtra("rain", Parcels.wrap(rainForecasts));
             startActivity(intent);
         }
     }

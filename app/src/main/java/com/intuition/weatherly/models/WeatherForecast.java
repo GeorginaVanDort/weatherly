@@ -4,7 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
+import org.parceler.Parcel;
 
+@Parcel
 public class WeatherForecast {
     private String mRealTime;
     private String mSummary;
@@ -13,6 +15,8 @@ public class WeatherForecast {
     private Double mTempMin;
     private String mIcon;
     private ArrayList<RainForecast> mRainForecasts = new ArrayList<>();
+
+    public WeatherForecast () {}
 
 
     public WeatherForecast(Long time, String timeZone, String summary,

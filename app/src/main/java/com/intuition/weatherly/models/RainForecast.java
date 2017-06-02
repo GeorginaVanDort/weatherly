@@ -3,23 +3,28 @@ package com.intuition.weatherly.models;
 
 import android.util.Log;
 
+import org.parceler.Parcel;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+@Parcel
 public class RainForecast {
 
     private String mIcon;
     private String mRealTime;
     private String mRainDescription;
 
+    public RainForecast() {}
+
     public RainForecast(Long time, String timeZone,  Double rainIntensity, String icon) {
-            mRealTime = getRealTime(time, timeZone);
-            mRainDescription = getRainDescription(rainIntensity);
+            mRealTime = setRealTime(time, timeZone);
+            mRainDescription = setRainDescription(rainIntensity);
             mIcon = setIcon(icon);
     }
 
-    public String getRealTime(long time, String timeZone) {
+    public String setRealTime(long time, String timeZone) {
         SimpleDateFormat formatter = new SimpleDateFormat("h:mm");
 
         formatter.setTimeZone(TimeZone.getTimeZone(timeZone));
@@ -29,7 +34,7 @@ public class RainForecast {
     }
 
 
-    public static String getRainDescription(Double rainIntensity){
+    public static String setRainDescription(Double rainIntensity){
         String rainDescription = "Heavy Rain";
 
         if (rainIntensity < 0.3) {
@@ -46,6 +51,18 @@ public class RainForecast {
 
     private String setIcon(String precipType) {
         return null;
+    }
+
+    public String getRealTime(){
+        return mRealTime;
+    }
+
+    public String getRainDescription() {
+        return mRainDescription;
+    }
+
+    public String getIcon() {
+        return mIcon;
     }
 }
 

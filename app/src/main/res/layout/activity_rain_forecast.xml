@@ -8,8 +8,8 @@
     android:background="@drawable/gradient"
     tools:context="com.intuition.weatherly.ui.RainForecastActivity">
 
-    <ListView
-        android:id="@+id/rainListView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rainRecyclerView"
         android:layout_width="395dp"
         android:layout_height="587dp"
         tools:layout_editor_absoluteX="8dp"
