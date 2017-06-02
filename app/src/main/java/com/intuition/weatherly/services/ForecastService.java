@@ -24,6 +24,7 @@ public class ForecastService {
 
     public static final String TAG = ForecastService.class.getSimpleName();
     private static WeatherForecast mWeatherForecast;
+    private static ArrayList<RainForecast> mRainForecasts;
 
 
 
@@ -60,6 +61,7 @@ public class ForecastService {
 
                 //Calls method to parse response//
                 mWeatherForecast = parseForecast(forecast);
+                mRainForecasts = parseRain(forecast);
             }
 
             //Report Errors, catch exceptions//
@@ -110,23 +112,26 @@ public class ForecastService {
         //Instantiate new Array//
         ArrayList<RainForecast> rainForecasts = new ArrayList<>();
 
-        //Get Dark Sky Minutely Forecasts//
+        //Get timezone and Icon//
+        String timeZone = forecast.getString("timezone");
+        String icon = forecast.getJSONObject("minutely").getString("icon");
+
+        //Get Minutely Array//
         JSONArray minutely = forecast.getJSONObject("minutely").getJSONArray("data");
 
-        //Loop through each forecast//
+        //Loop through each //
         for (int i = 0; i < minutely.length(); i+=5) {
-            JSONObject rainForecast = minutely.getJSONObject(i);
+            JSONObject rainForecastJSON = minutely.getJSONObject(i);
 
-            Long time = rainForecast.getLong("time");
-            Double rainIntensity = rainForecast.getDouble("precipIntensity");
-            String precipType = rainForecast.getString("precipType");
-            String rainDescription = RainForecast.getRainDescription(rainIntensity, precipType);
+            Long time = rainForecastJSON.getLong("time");
+            Double rainIntensity = rainForecastJSON.getDouble("precipIntensity");
 
 
-
+            //Construct Object//
+            RainForecast rainForecast = new RainForecast(time, timeZone, rainIntensity, icon);
+            rainForecasts.add(rainForecast);
         }
-
-
+        Log.v("HGHHG", rainForecasts.toString());
         return rainForecasts;
     }
 

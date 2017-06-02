@@ -9,71 +9,61 @@ import java.util.TimeZone;
 
 public class RainForecast {
 
-    private Long mTime;
-    private Double mRainIntensity;
-    private String mTimeZone;
-    private String mPrecipType;
+    private String mIcon;
+    private String mRealTime;
+    private String mRainDescription;
 
-    public String getPrecipType() {
-        return mPrecipType;
+    public RainForecast(Long time, String timeZone,  Double rainIntensity, String icon) {
+            mRealTime = getRealTime(time, timeZone);
+            mRainDescription = getRainDescription(rainIntensity);
+            mIcon = setIcon(icon);
     }
 
-    public void setPrecipType(String precipType) {
-        mPrecipType = precipType;
-    }
-
-    public String getTimeZone() {
-        return mTimeZone;
-    }
-
-    public void setTimeZone(String mTimeZone) {
-        this.mTimeZone = mTimeZone;
-    }
-
-    public Long getTime() {
-        return mTime;
-    }
-
-    public void setTime(Long mTime) {
-        this.mTime = mTime;
-    }
-
-    public String getRealTime() {
+    public String getRealTime(long time, String timeZone) {
         SimpleDateFormat formatter = new SimpleDateFormat("h:mm");
 
-        formatter.setTimeZone(TimeZone.getTimeZone(getTimeZone()));
-        Date dateTime = new Date(getTime() * 1000);
+        formatter.setTimeZone(TimeZone.getTimeZone(timeZone));
+        Date dateTime = new Date(time * 1000);
         String realTime = formatter.format(dateTime);
         return realTime;
     }
 
-    public Double getRainIntensity() {
-        return mRainIntensity;
-    }
 
-    public void setRainIntensity(Double mRainIntensity) { this.mRainIntensity = mRainIntensity;
-    }
+    public static String getRainDescription(Double rainIntensity){
+        String rainDescription = "Heavy Rain";
 
-    public static String getRainDescription(Double rainIntensity, String precipType){
-        String rainDescription = "No Rain";
-
+        if (rainIntensity < 0.3) {
+            rainDescription = "Rain";
+            }
         if (rainIntensity < 0.1) {
-            rainDescription = "Light " + precipType;
-        }
-        else if (rainIntensity < 0.3) {
-            rainDescription = precipType;
-        }
-        else if (rainIntensity > 0.3) {
-            rainDescription = "Heavy " + precipType;
-        }
+            rainDescription = "Light Rain";
+            }
+        if (rainIntensity == 0) {
+            rainDescription = "No Rain";
+            }
         return rainDescription;
     }
 
-    public RainForecast(Long time, Double rainIntensity, String timeZone, String precipType) {
-        mTime = time;
-        mRainIntensity = rainIntensity;
-        mTimeZone = timeZone;
-        mPrecipType = precipType;
+    private String setIcon(String precipType) {
+        return null;
     }
+//    public void setPrecipType(String precipType) {
+//        mPrecipType = precipType;
+//    }
+//
+//
+//
+//    public void setTimeZone(String mTimeZone) {
+//        this.mTimeZone = mTimeZone;
+//    }
+//
+//    public void setTime(Long mTime) {
+//        this.mTime = mTime;
+//    }
+
+
+
+
+
 }
 
