@@ -57,6 +57,9 @@ public class RainForecastAdapter extends RecyclerView.Adapter<RainForecastAdapte
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            Typeface weather = Typeface.createFromAsset(mContext.getAssets(),"fonts/weather.ttf");
+            mRainSymbol.setTypeface(weather);
+
         }
 
         public void bindRainForecast(RainForecast rainForecast) {
