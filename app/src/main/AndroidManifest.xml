@@ -12,26 +12,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.CityConfirmationActivity"
-            android:parentActivityName=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity">
         </activity>
         <activity
-            android:name=".ui.WeatherDisplayActivity"
-            android:parentActivityName=".ui.MainActivity">
+            android:name=".ui.CityConfirmationActivity">
         </activity>
         <activity
-            android:name=".ui.RainForecastActivity"
-            android:parentActivityName=".ui.MainActivity">
+            android:name=".ui.WeatherDisplayActivity">
         </activity>
-        <activity android:name=".ui.LoginActivity">
+        <activity
+            android:name=".ui.RainForecastActivity">
         </activity>
     </application>
 
