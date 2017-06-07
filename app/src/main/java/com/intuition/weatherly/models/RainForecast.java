@@ -18,10 +18,10 @@ public class RainForecast {
 
     public RainForecast() {}
 
-    public RainForecast(Long time, String timeZone,  Double rainIntensity, String icon) {
+    public RainForecast(Long time, String timeZone, Double rainIntensity) {
             mRealTime = setRealTime(time, timeZone);
             mRainDescription = setRainDescription(rainIntensity);
-            mIcon = setIcon(icon);
+            mIcon = setIcon(rainIntensity);
     }
 
     public String setRealTime(long time, String timeZone) {
@@ -49,8 +49,13 @@ public class RainForecast {
         return rainDescription;
     }
 
-    private String setIcon(String precipType) {
-        return null;
+    private String setIcon(Double rainIntensity) {
+        String icon = "b";
+
+        if (rainIntensity == 0) {
+            icon = ".";
+            }
+        return icon;
     }
 
     public String getRealTime(){
@@ -61,8 +66,6 @@ public class RainForecast {
         return mRainDescription;
     }
 
-    public String getIcon() {
-        return mIcon;
-    }
+    public String getIcon() { return mIcon; }
 }
 

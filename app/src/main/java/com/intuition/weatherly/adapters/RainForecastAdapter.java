@@ -1,6 +1,7 @@
 package com.intuition.weatherly.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +49,7 @@ public class RainForecastAdapter extends RecyclerView.Adapter<RainForecastAdapte
     public class RainForecastViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.rainSummaryLabel) TextView mRainSummaryLabel;
         @BindView(R.id.rainTimeLabel) TextView mRainTimeLabel;
-        @BindView(R.id.rainIconImageView) ImageView mRainIconImageView;
+        @BindView(R.id.rainSymbol) TextView mRainSymbol;
 
         private Context mContext;
 
@@ -56,43 +57,17 @@ public class RainForecastAdapter extends RecyclerView.Adapter<RainForecastAdapte
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            Typeface weather = Typeface.createFromAsset(mContext.getAssets(),"fonts/weather.ttf");
+            mRainSymbol.setTypeface(weather);
+
         }
 
         public void bindRainForecast(RainForecast rainForecast) {
             mRainTimeLabel.setText(rainForecast.getRealTime());
             mRainSummaryLabel.setText(rainForecast.getRainDescription());
+            String rainSymbolString = rainForecast.getIcon();
+            mRainSymbol.setText(rainSymbolString);
         }
     }
 
-
-//    @Override
-//    public int getCount() {
-//        return 8;
-//    }
-//
-//    @Override
-//    public Object getItem(int position) {
-//        return null;
-//    }
-//
-//    @Override
-//    public long getItemId(int position) {
-//        return 0;
-//    }
-//
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        View listView;
-//        if (convertView == null) {
-//            listView = inflater.inflate(R.layout.rain_forecast_item, null);
-//            TextView rainTimeLabel = (TextView) listView.findViewById(R.id.rainTimeLabel);
-//            TextView rainSummaryLabel = (TextView) listView.findViewById(R.id.rainSummaryLabel);
-//            rainTimeLabel.setText(mTimes[position]);
-//            rainSummaryLabel.setText(mSummary[position]);
-//        } else {
-//            listView = (View) convertView;
-//        }
-//        return listView;
-//    }
 }

@@ -100,7 +100,6 @@ public class ForecastService {
         Double tempMin = (dailyArray.getJSONObject(0).getDouble("temperatureMin"));
 
         //Get Minutely Array//
-        String rainIcon = forecast.getJSONObject("minutely").getString("icon");
         JSONArray minutely = forecast.getJSONObject("minutely").getJSONArray("data");
 
         //Loop through each //
@@ -112,7 +111,7 @@ public class ForecastService {
             Double rainIntensity = rainForecastJSON.getDouble("precipIntensity");
 
             //Construct Object and Push to Array//
-            RainForecast rainForecast = new RainForecast(rainTime, timeZone, rainIntensity, rainIcon);
+            RainForecast rainForecast = new RainForecast(rainTime, timeZone, rainIntensity);
             rainForecasts.add(rainForecast);
         }
 
