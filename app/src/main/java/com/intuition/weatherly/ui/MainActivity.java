@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.intuition.weatherly.R;
 
 import butterknife.BindView;
@@ -24,9 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @BindView(R.id.appTitle) TextView mAppTitle;
     @BindView(R.id.enterCityText) TextView mEnterCityText;
-    @BindView(R.id.cityInput) EditText mCityInput;
     @BindView(R.id.addCityButton) Button mAddCityButton;
-
+    @BindView(R.id.locSpinner) Spinner mLocspinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Bind Views and set fonts//
         ButterKnife.bind(this);
-        Typeface aire = Typeface.createFromAsset(getAssets(),"fonts/aire.ttf");
-        mAppTitle.setTypeface(aire);
-        mEnterCityText.setTypeface(aire);
+        Typeface leck = Typeface.createFromAsset(getAssets(),"fonts/leck.ttf");
+        mAppTitle.setTypeface(leck);
+        mEnterCityText.setTypeface(leck);
+
+        //set up spinner//
+
 
         //Set onclick listener//
         mAddCityButton.setOnClickListener(this);
@@ -48,8 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == mAddCityButton) {
-            String city = mCityInput.getText().toString();
-
+            String city = mLocspinner.getSelectedItem().toString();
             //validate input//
             if (city == null || city.isEmpty()) {
                 alertUser();
@@ -67,30 +65,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void alertUser() {
         AlertDialogFragment dialog = new AlertDialogFragment();
         dialog.show(getFragmentManager(),"Input a City");
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_logout) {
-            logout();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void logout() {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
     }
 }

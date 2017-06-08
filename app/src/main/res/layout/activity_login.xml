@@ -73,7 +73,7 @@
             android:background="@drawable/border"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:padding="10dp"
             android:textAlignment="center"
             android:textColorHint="@android:color/white"

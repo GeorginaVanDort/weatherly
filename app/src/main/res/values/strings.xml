@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Weatherly</string>
+    <string-array name="locations">
+        <item>Portland</item>
+        <item>Hong Kong</item>
+        <item>Beijing</item>
+        <item>Melbourne</item>
+        <item>Kyoto</item>
+        <item>Vancouver BC</item>
+        <item>Paris</item>
+        <item>London</item>
+        <item>New York</item>
+        <item>Auckland</item>
+        <item>San Francisco</item>
+    </string-array>
 </resources>
