@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
-        Typeface leck = Typeface.createFromAsset(getAssets(),"fonts/leck.ttf");
+        Typeface leck = Typeface.createFromAsset(getAssets(),"fonts/breeze.ttf");
         mLoginButt.setTypeface(leck);
         mCreateAccButt.setTypeface(leck);
         mLoginTitle.setTypeface(leck);

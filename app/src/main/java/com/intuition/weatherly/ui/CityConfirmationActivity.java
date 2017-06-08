@@ -34,7 +34,7 @@ public class CityConfirmationActivity extends AppCompatActivity {
 
         //Bind Views and set fonts//
         ButterKnife.bind(this);
-        Typeface pacifico = Typeface.createFromAsset(getAssets(),"fonts/pacifico.ttf");
+        Typeface pacifico = Typeface.createFromAsset(getAssets(),"fonts/breeze.ttf");
         mCityInputResult.setTypeface(pacifico);
         mChooseCityText.setTypeface(pacifico);
 
