@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Bind Views and set fonts//
         ButterKnife.bind(this);
-        Typeface pacifico = Typeface.createFromAsset(getAssets(),"fonts/pacifico.ttf");
-        mAppTitle.setTypeface(pacifico);
-        mEnterCityText.setTypeface(pacifico);
+        Typeface aire = Typeface.createFromAsset(getAssets(),"fonts/aire.ttf");
+        mAppTitle.setTypeface(aire);
+        mEnterCityText.setTypeface(aire);
 
         //Set onclick listener//
         mAddCityButton.setOnClickListener(this);

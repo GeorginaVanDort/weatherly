@@ -1,10 +1,12 @@
 package com.intuition.weatherly.ui;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.intuition.weatherly.R;
@@ -24,6 +26,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.createPass) TextView mCreatePassword;
     @BindView(R.id.createPassConf) TextView mCreatePasswordConf;
     @BindView(R.id.createAccOk) TextView mCreateAccOk;
+    @BindView(R.id.accViewGroup) LinearLayout mAccViewGroup;
+    @BindView(R.id.loginViewGroup) LinearLayout mLoginViewGroup;
 
 
     @Override
@@ -32,6 +36,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
+        Typeface leck = Typeface.createFromAsset(getAssets(),"fonts/leck.ttf");
+        mLoginButt.setTypeface(leck);
+        mCreateAccButt.setTypeface(leck);
 
         mLoginButt.setOnClickListener(this);
         mCreateAccButt.setOnClickListener(this);
@@ -41,17 +48,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (v == mLoginButt) {
-            slideToBottom(mLoginEmail);
-            slideToBottom(mLoginPassword);
-            slideToBottom(mLoginOk);
+            slideToBottom(mLoginViewGroup);
+            mAccViewGroup.clearAnimation();
+            mAccViewGroup.setVisibility(View.GONE);
         }
 
         if (v == mCreateAccButt) {
-            slideToBottom(mCreateName);
-            slideToBottom(mCreateEmail);
-            slideToBottom(mCreatePassword);
-            slideToBottom(mCreatePasswordConf);
-            slideToBottom(mCreateAccOk);
+            slideToBottom(mAccViewGroup);
+            mLoginViewGroup.clearAnimation();
+            mLoginViewGroup.setVisibility(View.GONE);
         }
     }
 
