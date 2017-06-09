@@ -77,7 +77,32 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         if (city.toString().equals("Hong Kong")) {
             mLongitude = 114.173870;
             mLatitude = 22.293067;
+        }if (city.toString().equals("Melbourne")) {
+            mLongitude =144.963058;
+            mLatitude = -37.813628;
+        }if (city.toString().equals("Paris")) {
+            mLongitude = 2.352222;
+            mLatitude = 48.856614;
+        }if (city.toString().equals("London")) {
+            mLongitude = -0.127758;
+            mLatitude = 51.507351;
+        }if (city.toString().equals("Beijing")) {
+            mLongitude = 116.407396;
+            mLatitude = 39.904200;
+        }if (city.toString().equals("Kyoto")) {
+            mLongitude = 135.768029;
+            mLatitude = 35.011636;
+        }if (city.toString().equals("Vancouver BC")) {
+            mLongitude = -123.120738;
+            mLatitude = 49.282729;
+        }if (city.toString().equals("New York")) {
+            mLongitude = -74.005941;
+            mLatitude = 40.712784;
+        }if (city.toString().equals("Portland")) {
+            mLongitude = -122.676482;
+            mLatitude = 45.523062;
         }
+
 
         //Make api call//
         ForecastService.getForecast(mLatitude, mLongitude, new Callback() {
