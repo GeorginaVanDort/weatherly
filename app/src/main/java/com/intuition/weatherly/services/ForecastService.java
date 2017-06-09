@@ -100,26 +100,30 @@ public class ForecastService {
         Double tempMin = (dailyArray.getJSONObject(0).getDouble("temperatureMin"));
 
         //Get Minutely Array//
-        JSONArray minutely = forecast.getJSONObject("minutely").getJSONArray("data");
+        if (forecast.has("minutely")){
 
-        //Loop through each //
-        ArrayList<RainForecast> rainForecasts = new ArrayList<>();
-        for (int i = 0; i < minutely.length(); i+=5) {
-            JSONObject rainForecastJSON = minutely.getJSONObject(i);
+            JSONArray minutely = forecast.getJSONObject("minutely").getJSONArray("data");
+            mRainForecasts = new ArrayList<>();
 
-            Long rainTime = rainForecastJSON.getLong("time");
-            Double rainIntensity = rainForecastJSON.getDouble("precipIntensity");
+            //Loop through each //
+            for (int i = 0; i < minutely.length(); i+=5) {
+                JSONObject rainForecastJSON = minutely.getJSONObject(i);
 
-            //Construct Object and Push to Array//
-            RainForecast rainForecast = new RainForecast(rainTime, timeZone, rainIntensity);
-            rainForecasts.add(rainForecast);
+                Long rainTime = rainForecastJSON.getLong("time");
+                Double rainIntensity = rainForecastJSON.getDouble("precipIntensity");
+
+                //Construct Object and Push to Array//
+                RainForecast rainForecast = new RainForecast(rainTime, timeZone, rainIntensity);
+                mRainForecasts.add(rainForecast);
+            }
         }
 
-        //Construct Forecast Object//
-        WeatherForecast weatherForecast = new WeatherForecast(time, timeZone, summary, temperature,
-                tempMax, tempMin, icon, rainForecasts);
+            //Construct Forecast Object//
+            WeatherForecast weatherForecast = new WeatherForecast(time, timeZone, summary, temperature,
+                tempMax, tempMin, icon, mRainForecasts);
 
         return weatherForecast;
+
     }
 
 }

@@ -36,8 +36,8 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     public static final String TAG = WeatherDisplayActivity.class.getSimpleName();
 
     private WeatherForecast mForecast;
-    Double mLatitude = 45.5208;
-    Double mLongitude = -122.6795;
+    Double mLatitude;
+    Double mLongitude;
 
     @BindView(R.id.cityTextView) TextView mCityTextView;
     @BindView(R.id.temp_text_view) TextView mTempTextView;
@@ -71,10 +71,15 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         //Get data from intent//
         Intent intent = getIntent();
         String city = intent.getStringExtra("cityFinal");
-        mCityTextView.setText("Portland");
+        mCityTextView.setText(city);
+
+        //get lat/long//
+        if (city.toString().equals("Hong Kong")) {
+            mLongitude = 114.173870;
+            mLatitude = 22.293067;
+        }
 
         //Make api call//
-
         ForecastService.getForecast(mLatitude, mLongitude, new Callback() {
 
             //On Failure//
@@ -93,6 +98,9 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
                         mTempTextView.setText(mForecast.getTemp());
                         mSummaryText.setText(mForecast.getSummary());
                         mTimeLabel.setText(mForecast.getRealTime());
+                        if (mForecast.getRainForecasts()==null){
+                            mGetRainText.setVisibility(View.GONE);
+                        }
                     }
                 });
             }
