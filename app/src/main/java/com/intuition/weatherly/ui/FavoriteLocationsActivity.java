@@ -29,7 +29,6 @@ public class FavoriteLocationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_locations);
         ButterKnife.bind(this);
-        Log.v("HDRGERTGEWR", "LAYOUT SET");
 
         mLocationRef = FirebaseDatabase.getInstance().getReference(Constants.FB_LOCATION);
         bindAdapter();
