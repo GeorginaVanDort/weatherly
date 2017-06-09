@@ -12,4 +12,10 @@
         android:title="Add City"
         android:visible="true"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/saved_locs"
+        android:title="Favorites"
+        android:visible="true"
+        app:showAsAction="never" />
 </menu>
