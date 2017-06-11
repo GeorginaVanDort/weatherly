@@ -56,38 +56,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mNewLoc = mSharedPreferences.getString(Constants.PREFERENCES_NEW_CITY, null);
 
 
-        if (mNewLoc == "" && mHomeLoc != null) {
+        if (mNewLoc.equals("") && mHomeLoc != null) {
             Intent intent = new Intent(MainActivity.this, WeatherDisplayActivity.class);
             intent.putExtra("city", mHomeLoc);
             mEditor.putString(Constants.PREFERENCES_NEW_CITY, "").apply();
             startActivity(intent);
         }
 
-//        //set spinner content to 0//
-//        int initialposition=mLocspinner.getSelectedItemPosition();
-//        mLocspinner.setSelection(initialposition, false);
-
         //Set onclick listener//
         mAddCityButton.setOnClickListener(this);
         mHomeButton.setOnClickListener(this);
-
-        //set spinner listener//
-//            mLocspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                @Override
-//                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                    String city = mLocspinner.getSelectedItem().toString();
-//                    Intent intent = new Intent(MainActivity.this, CityConfirmationActivity.class);
-//                    intent.putExtra("city", city);
-//                    startActivity(intent);
-//                }
-//
-//                @Override
-//                public void onNothingSelected(AdapterView<?> parent) {
-//                    alertUser();
-//                }
-//            });
-
-
     }
 
 
@@ -116,14 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String city = mLocspinner.getSelectedItem().toString();
             mEditor.putString(Constants.PREFERENCES_SET_HOME, city).apply();
 
-            mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-            String PREF = mSharedPreferences.getString(Constants.PREFERENCES_SET_HOME, null);
-            Log.v("SHARED PREF!!!!!", PREF);
-
             Intent intent = new Intent(MainActivity.this, WeatherDisplayActivity.class);
             intent.putExtra("city", city);
+            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "").apply();
             startActivity(intent);
-
         }
     }
 
