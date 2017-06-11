@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,9 @@ import com.squareup.picasso.Picasso;
 public class FirebaseLocationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
+    private static Double mLat;
+    private static Double mLong;
+
 
     View mView;
     Context mContext;
@@ -47,13 +51,14 @@ public class FirebaseLocationViewHolder extends RecyclerView.ViewHolder implemen
         locAddress.setText(location.getAddress());
         locLat.setText(location.getLatitude().toString());
         locLong.setText(location.getLongitude().toString());
+        mLat= location.getLatitude();
+        mLong= location.getLongitude();
     }
 
 
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(mContext, WeatherDisplayActivity.class);
-        mContext.startActivity(intent);
+        Log.v("Layout Position", String.valueOf(getAdapterPosition()));
     }
 }

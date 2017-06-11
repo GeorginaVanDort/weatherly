@@ -1,9 +1,11 @@
 package com.intuition.weatherly.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +42,8 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
 
     public static final String TAG = WeatherDisplayActivity.class.getSimpleName();
 
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
     private WeatherForecast mForecast;
     private Location mLocation;
     Double mLatitude;
@@ -61,6 +65,9 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_display);
 
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
         //Bind Views and set fonts//
         ButterKnife.bind(this);
         Typeface lato = Typeface.createFromAsset(getAssets(),"fonts/lato.ttf");
@@ -79,7 +86,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
 
         //Get data from intent//
         Intent intent = getIntent();
-        mCity = intent.getStringExtra("cityFinal");
+        mCity = intent.getStringExtra("city");
         mCityTextView.setText(mCity);
         mLocation = processCity(mCity);
 
@@ -165,6 +172,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         if (id == R.id.add_city) {
             Intent intent = new Intent(WeatherDisplayActivity.this, MainActivity.class);
             startActivity(intent);
+            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "true").apply();
         }
         if (id == R.id.saved_locs) {
             Intent intent = new Intent(WeatherDisplayActivity.this, FavoriteLocationsActivity.class);

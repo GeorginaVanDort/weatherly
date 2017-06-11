@@ -55,7 +55,7 @@ public class CityConfirmationActivity extends AppCompatActivity {
 
                 //Start next activity//
                 Intent intent  = new Intent(CityConfirmationActivity.this, WeatherDisplayActivity.class);
-                intent.putExtra("cityFinal", city);
+                intent.putExtra("city", city);
                 startActivity(intent);
             }
         });
