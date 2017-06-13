@@ -9,13 +9,19 @@
 
     <item
         android:id="@+id/add_city"
-        android:title="Add City"
+        android:title="New City"
         android:visible="true"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/saved_locs"
-        android:title="Favorites"
+    android:id="@+id/saved_locs"
+    android:title="Favorites"
+    android:visible="true"
+    app:showAsAction="never" />
+
+    <item
+        android:id="@+id/home_city"
+        android:title="Home"
         android:visible="true"
         app:showAsAction="never" />
 </menu>

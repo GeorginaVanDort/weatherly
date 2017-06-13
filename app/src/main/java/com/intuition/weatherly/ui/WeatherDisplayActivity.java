@@ -60,6 +60,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     @BindView(R.id.timeLabel) TextView mTimeLabel;
     @BindView(R.id.degreesTextView) TextView mDegrees;
     @BindView(R.id.homeView) ImageView mHomeView;
+    @BindView(R.id.mapLink) ImageView mMapLink;
 
 
     @Override
@@ -133,6 +134,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         mGetRainText.setOnClickListener(this);
         mCityTextView.setOnClickListener(this);
         mTimeLabel.setOnClickListener(this);
+        mMapLink.setOnClickListener(this);
     }
 
 
@@ -145,7 +147,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
             intent.putExtra("rain", Parcels.wrap(rainForecasts));
             startActivity(intent);
         }
-        if (v == mCityTextView){
+        if (v == mCityTextView || v == mMapLink ){
             Intent mapIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("geo:" + mLatitude
                             + "," + mLongitude
@@ -186,6 +188,11 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         }
         if (id == R.id.saved_locs) {
             Intent intent = new Intent(WeatherDisplayActivity.this, FavoriteLocationsActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.home_city) {
+            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "").apply();
+            Intent intent = new Intent(WeatherDisplayActivity.this, MainActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

@@ -127,6 +127,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, FavoriteLocationsActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.home_city) {
+            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "").apply();
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 

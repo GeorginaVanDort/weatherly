@@ -90,6 +90,11 @@ public class FavoriteLocationsActivity extends AppCompatActivity {
             Intent intent = new Intent(FavoriteLocationsActivity.this, FavoriteLocationsActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.home_city) {
+            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "").apply();
+            Intent intent = new Intent(FavoriteLocationsActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
