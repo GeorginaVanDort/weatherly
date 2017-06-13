@@ -17,9 +17,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.intuition.weatherly.Constants;
 import com.intuition.weatherly.R;
 import com.intuition.weatherly.models.Location;
@@ -42,6 +46,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
 
     public static final String TAG = WeatherDisplayActivity.class.getSimpleName();
 
+    private DatabaseReference mLocationRef;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private WeatherForecast mForecast;
@@ -51,8 +56,8 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     private String mAddress;
     private String mCity;
     private String mHomeLoc;
-
     private String mIconUrl;
+
     @BindView(R.id.cityTextView) TextView mCityTextView;
     @BindView(R.id.temp_text_view) TextView mTempTextView;
     @BindView(R.id.summaryText) TextView mSummaryText;
@@ -72,7 +77,9 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         mHomeLoc = mSharedPreferences.getString(Constants.PREFERENCES_SET_HOME, null);
         mEditor = mSharedPreferences.edit();
 
-
+        mLocationRef = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FB_LOCATION);
 
         //Bind Views and set fonts//
         ButterKnife.bind(this);
@@ -115,7 +122,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
                 //Process Response Data//
                 mForecast = ForecastService.processResults(response);
 
-                
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -135,6 +142,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         mCityTextView.setOnClickListener(this);
         mTimeLabel.setOnClickListener(this);
         mMapLink.setOnClickListener(this);
+
     }
 
 
@@ -142,12 +150,12 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View v) {
         if (v == mGetRainText) {
-            Intent intent  = new Intent(WeatherDisplayActivity.this, RainForecastActivity.class);
+            Intent intent = new Intent(WeatherDisplayActivity.this, RainForecastActivity.class);
             ArrayList<RainForecast> rainForecasts = mForecast.getRainForecasts();
             intent.putExtra("rain", Parcels.wrap(rainForecasts));
             startActivity(intent);
         }
-        if (v == mCityTextView || v == mMapLink ){
+        if (v == mCityTextView || v == mMapLink) {
             Intent mapIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("geo:" + mLatitude
                             + "," + mLongitude
@@ -156,14 +164,27 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
             startActivity(mapIntent);
         }
         if (v == mTimeLabel) {
-            Log.v(TAG, mLocation.getAddress().toString());
-            DatabaseReference locationRef = FirebaseDatabase
-                    .getInstance()
-                    .getReference(Constants.FB_LOCATION);
-            locationRef.push().setValue(mLocation);
+            Log.v(TAG, mLocation.getAddress());
+            mLocationRef.child(Constants.FB_LOCATION).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String address = snapshot.getValue().toString();
+                        Log.v("SDFSDFSDF", address);
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            mLocationRef.push().setValue(mLocation);
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
 
     //Set Up Menu//
     @Override
