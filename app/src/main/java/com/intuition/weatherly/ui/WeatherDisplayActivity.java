@@ -50,14 +50,16 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     Double mLongitude;
     private String mAddress;
     private String mCity;
-    private String mIconUrl;
+    private String mHomeLoc;
 
+    private String mIconUrl;
     @BindView(R.id.cityTextView) TextView mCityTextView;
     @BindView(R.id.temp_text_view) TextView mTempTextView;
     @BindView(R.id.summaryText) TextView mSummaryText;
     @BindView(R.id.getRainText) TextView mGetRainText;
     @BindView(R.id.timeLabel) TextView mTimeLabel;
     @BindView(R.id.degreesTextView) TextView mDegrees;
+    @BindView(R.id.homeView) ImageView mHomeView;
 
 
     @Override
@@ -66,7 +68,10 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_weather_display);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mHomeLoc = mSharedPreferences.getString(Constants.PREFERENCES_SET_HOME, null);
         mEditor = mSharedPreferences.edit();
+
+
 
         //Bind Views and set fonts//
         ButterKnife.bind(this);
@@ -88,6 +93,11 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         Intent intent = getIntent();
         mCity = intent.getStringExtra("city");
         mCityTextView.setText(mCity);
+
+        if (mHomeLoc.equals(mCity)){
+            mHomeView.setVisibility(View.VISIBLE);
+        }
+
         mLocation = processCity(mCity);
 
         //Make api call//
