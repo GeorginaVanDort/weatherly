@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,19 +32,6 @@ public class FavoriteLocationsActivity extends AppCompatActivity {
 
     @BindView(R.id.favRecyclerView) RecyclerView mRecyclerView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorite_locations);
-        ButterKnife.bind(this);
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
-
-        mLocationRef = FirebaseDatabase.getInstance().getReference(Constants.FB_LOCATION);
-        bindAdapter();
-    }
-
     private void bindAdapter() {
         mFirebaseAdapter = new FirebaseRecyclerAdapter <Location, FirebaseLocationViewHolder>
                 (Location.class, R.layout.fav_location_item, FirebaseLocationViewHolder.class, mLocationRef) {
@@ -57,6 +43,20 @@ public class FavoriteLocationsActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_favorite_locations);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        mLocationRef = FirebaseDatabase.getInstance().getReference(Constants.FB_LOCATION);
+        bindAdapter();
     }
 
     @Override

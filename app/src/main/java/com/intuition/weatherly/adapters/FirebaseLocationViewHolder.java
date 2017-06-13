@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 public class FirebaseLocationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
-    private static Double mLat;
+    private static String mLat;
     private static Double mLong;
 
 
@@ -51,14 +51,15 @@ public class FirebaseLocationViewHolder extends RecyclerView.ViewHolder implemen
         locAddress.setText(location.getAddress());
         locLat.setText(location.getLatitude().toString());
         locLong.setText(location.getLongitude().toString());
-        mLat= location.getLatitude();
-        mLong= location.getLongitude();
     }
-
-
 
     @Override
     public void onClick(View v) {
-        Log.v("Layout Position", String.valueOf(getAdapterPosition()));
+        TextView textView = (TextView) itemView.findViewById(R.id.locListCity);
+        String city = textView.getText().toString();
+        Log.v("CITY", city);
+        Intent intent = new Intent(mContext, WeatherDisplayActivity.class);
+        intent.putExtra("city", city);
+        mContext.startActivity(intent);
     }
 }

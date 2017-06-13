@@ -13,4 +13,5 @@
         <item>Auckland</item>
         <item>San Francisco</item>
     </string-array>
+<item name="item_click_support" type="id" />
 </resources>
