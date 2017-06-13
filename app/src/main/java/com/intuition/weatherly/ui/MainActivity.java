@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mNewLoc = mSharedPreferences.getString(Constants.PREFERENCES_NEW_CITY, null);
 
 
-        if (mNewLoc.equals("") && mHomeLoc != null) {
+        if (mNewLoc == "" && mHomeLoc != null) {
             Intent intent = new Intent(MainActivity.this, WeatherDisplayActivity.class);
             intent.putExtra("city", mHomeLoc);
             mEditor.putString(Constants.PREFERENCES_NEW_CITY, "").apply();
