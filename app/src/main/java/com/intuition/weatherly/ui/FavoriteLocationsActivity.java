@@ -19,11 +19,12 @@ import com.intuition.weatherly.Constants;
 import com.intuition.weatherly.R;
 import com.intuition.weatherly.adapters.FirebaseLocationViewHolder;
 import com.intuition.weatherly.models.Location;
+import com.intuition.weatherly.util.OnStartDragListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FavoriteLocationsActivity extends AppCompatActivity {
+public class FavoriteLocationsActivity extends AppCompatActivity implements OnStartDragListener {
 
     private DatabaseReference mLocationRef;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
@@ -31,6 +32,20 @@ public class FavoriteLocationsActivity extends AppCompatActivity {
     private SharedPreferences.Editor mEditor;
 
     @BindView(R.id.favRecyclerView) RecyclerView mRecyclerView;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_favorite_locations);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        mLocationRef = FirebaseDatabase.getInstance().getReference(Constants.FB_LOCATION);
+        bindAdapter();
+    }
 
     private void bindAdapter() {
         mFirebaseAdapter = new FirebaseRecyclerAdapter <Location, FirebaseLocationViewHolder>
@@ -44,19 +59,6 @@ public class FavoriteLocationsActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
 
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorite_locations);
-        ButterKnife.bind(this);
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
-
-        mLocationRef = FirebaseDatabase.getInstance().getReference(Constants.FB_LOCATION);
-        bindAdapter();
     }
 
     @Override
@@ -104,5 +106,10 @@ public class FavoriteLocationsActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+
     }
 }
