@@ -12,12 +12,11 @@
         android:id="@+id/cityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="151dp"
         android:capitalize="characters"
         android:text="-"
         android:textColor="@android:color/white"
         android:textSize="36sp"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +35,8 @@
         app:layout_constraintTop_toTopOf="@+id/temp_text_view"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="0dp" />
 
     <TextView
         android:id="@+id/temp_text_view"
@@ -54,7 +54,7 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1"
-        app:layout_constraintVertical_bias="0.425" />
+        app:layout_constraintVertical_bias="0.466" />
 
     <TextView
         android:id="@+id/summaryText"
@@ -68,7 +68,7 @@
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintTop_toBottomOf="@+id/temp_text_view"
         app:layout_constraintHorizontal_bias="0.501"/>
 
@@ -76,17 +76,17 @@
         android:id="@+id/timeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/border"
-        android:padding="10dp"
+        android:padding="5dp"
         android:text="Save to Favorites"
         android:textColor="@android:color/white"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp" />
+        tools:layout_constraintRight_creator="1" />
 
     <TextView
         android:id="@+id/getRainText"
@@ -114,13 +114,13 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:visibility="gone"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@drawable/home"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="-1dp"
         app:layout_constraintBottom_toTopOf="@+id/cityTextView" />
 
     <ImageView
@@ -131,12 +131,70 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/cityTextView"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/cityTextView"
         app:srcCompat="@drawable/ic_place_white_24dp"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintTop_creator="1" />
+
+    <ImageView
+        android:id="@+id/weatherMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_brightness_high_white_24dp" />
+
+    <ImageView
+        tools:visibility="visible"
+        android:id="@+id/weatherAddCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="51dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintRight_toLeftOf="@+id/weatherMenu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_add_circle_outline_white_24dp" />
+
+    <ImageView
+        tools:visibility="visible"
+        android:visibility="invisible"
+        android:id="@+id/weatherFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_favorite_border_white_24dp"
+        android:layout_marginRight="63dp"
+        app:layout_constraintRight_toRightOf="@+id/weatherMenu"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/weatherAddCity" />
+
+    <ImageView
+        tools:visibility="visible"
+        android:visibility="invisible"
+        android:id="@+id/weatherHomeCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_home_white_24dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintRight_toRightOf="@+id/weatherMenu"
+        android:layout_marginTop="34dp"
+        app:layout_constraintTop_toBottomOf="@+id/weatherMenu" />
+
+    <ImageView
+        tools:visibility="visible"
+        android:visibility="invisible"
+        android:id="@+id/weatherLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_highlight_off_white_24dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/weatherMenu"
+        android:layout_marginRight="4dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

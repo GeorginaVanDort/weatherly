@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +67,11 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     @BindView(R.id.degreesTextView) TextView mDegrees;
     @BindView(R.id.homeView) ImageView mHomeView;
     @BindView(R.id.mapLink) ImageView mMapLink;
+    @BindView(R.id.weatherMenu) ImageView mWeatherMenu;
+    @BindView(R.id.weatherAddCity) ImageView mWeatherAddCity;
+    @BindView(R.id.weatherFav) ImageView mWeatherFav;
+    @BindView(R.id.weatherHomeCity) ImageView mWeatherHomeCity;
+    @BindView(R.id.weatherLogout) ImageView mWeatherLogout;
 
 
     @Override
@@ -142,7 +148,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         mCityTextView.setOnClickListener(this);
         mTimeLabel.setOnClickListener(this);
         mMapLink.setOnClickListener(this);
-
+        mWeatherMenu.setOnClickListener(this);
     }
 
 
@@ -181,9 +187,66 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
             mLocationRef.push().setValue(mLocation);
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
         }
+        if (v == mWeatherMenu) {
+            slideOutLeft(mWeatherAddCity);
+            slideOutDown1(mWeatherFav);
+            slideOutDown2(mWeatherHomeCity);
+            slideOutDown(mWeatherLogout);
+
+        }
     }
 
+    public void slideOutLeft(View view){
+        if (view.getVisibility()==View.GONE) {
+            TranslateAnimation animate = new TranslateAnimation(150,0,0,0);
+            animate.setDuration(500);
+            animate.setFillAfter(true);
+            view.startAnimation(animate);
+            view.setVisibility(View.VISIBLE);
+        } else {
+            view.clearAnimation();
+            view.setVisibility(View.GONE);
+        }
+    }
 
+    public void slideOutDown1(View view){
+        if (view.getVisibility()==View.GONE) {
+            TranslateAnimation animate = new TranslateAnimation(150,0,0,30);
+            animate.setDuration(500);
+            animate.setFillAfter(true);
+            view.startAnimation(animate);
+            view.setVisibility(View.VISIBLE);
+        } else {
+            view.clearAnimation();
+            view.setVisibility(View.GONE);
+        }
+    }
+
+    public void slideOutDown2(View view){
+        if (view.getVisibility()==View.GONE) {
+            TranslateAnimation animate = new TranslateAnimation(30,0,-30,0);
+            animate.setDuration(500);
+            animate.setFillAfter(true);
+            view.startAnimation(animate);
+            view.setVisibility(View.VISIBLE);
+        } else {
+            view.clearAnimation();
+            view.setVisibility(View.GONE);
+        }
+    }
+
+    public void slideOutDown(View view){
+            if (view.getVisibility()==View.GONE) {
+                TranslateAnimation animate = new TranslateAnimation(0,0,-30,0);
+                animate.setDuration(500);
+                animate.setFillAfter(true);
+                view.startAnimation(animate);
+                view.setVisibility(View.VISIBLE);
+            } else {
+                view.clearAnimation();
+                view.setVisibility(View.GONE);
+            }
+        }
 
 
     //Set Up Menu//
