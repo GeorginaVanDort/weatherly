@@ -71,11 +71,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     @BindView(R.id.degreesTextView) TextView mDegrees;
     @BindView(R.id.homeView) ImageView mHomeView;
     @BindView(R.id.mapLink) ImageView mMapLink;
-    @BindView(R.id.weatherMenu) ImageView mWeatherMenu;
-    @BindView(R.id.weatherAddCity) ImageView mWeatherAddCity;
-    @BindView(R.id.weatherFav) ImageView mWeatherFav;
-    @BindView(R.id.weatherHomeCity) ImageView mWeatherHomeCity;
-    @BindView(R.id.weatherLogout) ImageView mWeatherLogout;
+
 
 
 
@@ -153,11 +149,11 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         mCityTextView.setOnClickListener(this);
         mTimeLabel.setOnClickListener(this);
         mMapLink.setOnClickListener(this);
-        mWeatherMenu.setOnClickListener(this);
-        mWeatherAddCity.setOnClickListener(this);
-        mWeatherFav.setOnClickListener(this);
-        mWeatherHomeCity.setOnClickListener(this);
-        mWeatherLogout.setOnClickListener(this);
+//        mWeatherMenu.setOnClickListener(this);
+//        mWeatherAddCity.setOnClickListener(this);
+//        mWeatherFav.setOnClickListener(this);
+//        mWeatherHomeCity.setOnClickListener(this);
+//        mWeatherLogout.setOnClickListener(this);
     }
 
 
@@ -185,7 +181,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         String address = snapshot.getValue().toString();
-                        Log.v("SDFSDFSDF", address);
+                        Log.v("Fav Added", address);
                     }
                 }
                 @Override
@@ -196,30 +192,30 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
             mLocationRef.push().setValue(mLocation);
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
         }
-        if (v == mWeatherMenu) {
-            slideOutLeft(mWeatherAddCity);
-            slideOutDown1(mWeatherFav);
-            slideOutDown2(mWeatherHomeCity);
-            slideOutDown(mWeatherLogout);
-
-        }
-        if (v == mWeatherAddCity) {
-            Intent intent = new Intent(WeatherDisplayActivity.this, MainActivity.class);
-            startActivity(intent);
-            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "true").apply();
-        }
-        if (v == mWeatherFav) {
-            Intent intent = new Intent(WeatherDisplayActivity.this, FavoriteLocationsActivity.class);
-            startActivity(intent);
-        }
-        if (v == mWeatherHomeCity) {
-            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "").apply();
-            Intent intent = new Intent(WeatherDisplayActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
-        if (v == mWeatherLogout) {
-            logout();
-        }
+//        if (v == mWeatherMenu) {
+//            slideOutLeft(mWeatherAddCity);
+//            slideOutDown1(mWeatherFav);
+//            slideOutDown2(mWeatherHomeCity);
+//            slideOutDown(mWeatherLogout);
+//
+//        }
+//        if (v == mWeatherAddCity) {
+//            Intent intent = new Intent(WeatherDisplayActivity.this, MainActivity.class);
+//            startActivity(intent);
+//            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "true").apply();
+//        }
+//        if (v == mWeatherFav) {
+//            Intent intent = new Intent(WeatherDisplayActivity.this, FavoriteLocationsActivity.class);
+//            startActivity(intent);
+//        }
+//        if (v == mWeatherHomeCity) {
+//            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "").apply();
+//            Intent intent = new Intent(WeatherDisplayActivity.this, MainActivity.class);
+//            startActivity(intent);
+//        }
+//        if (v == mWeatherLogout) {
+//            logout();
+//        }
 
     }
 
