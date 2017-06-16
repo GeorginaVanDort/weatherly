@@ -37,14 +37,11 @@ public class Menu extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
         View view = inflater.inflate(R.layout.fragment_menu, parent, false);
         ButterKnife.bind(this, view);
         return view;
     }
 
-    // This event is triggered soon after onCreateView().
-    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -58,7 +55,6 @@ public class Menu extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        DatabaseReference mLocationRef;
         SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor mEditor = mSharedPreferences.edit();
 
