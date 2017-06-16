@@ -149,11 +149,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         mCityTextView.setOnClickListener(this);
         mTimeLabel.setOnClickListener(this);
         mMapLink.setOnClickListener(this);
-//        mWeatherMenu.setOnClickListener(this);
-//        mWeatherAddCity.setOnClickListener(this);
-//        mWeatherFav.setOnClickListener(this);
-//        mWeatherHomeCity.setOnClickListener(this);
-//        mWeatherLogout.setOnClickListener(this);
+
     }
 
 
@@ -192,128 +188,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
             mLocationRef.push().setValue(mLocation);
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
         }
-//        if (v == mWeatherMenu) {
-//            slideOutLeft(mWeatherAddCity);
-//            slideOutDown1(mWeatherFav);
-//            slideOutDown2(mWeatherHomeCity);
-//            slideOutDown(mWeatherLogout);
-//
-//        }
-//        if (v == mWeatherAddCity) {
-//            Intent intent = new Intent(WeatherDisplayActivity.this, MainActivity.class);
-//            startActivity(intent);
-//            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "true").apply();
-//        }
-//        if (v == mWeatherFav) {
-//            Intent intent = new Intent(WeatherDisplayActivity.this, FavoriteLocationsActivity.class);
-//            startActivity(intent);
-//        }
-//        if (v == mWeatherHomeCity) {
-//            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "").apply();
-//            Intent intent = new Intent(WeatherDisplayActivity.this, MainActivity.class);
-//            startActivity(intent);
-//        }
-//        if (v == mWeatherLogout) {
-//            logout();
-//        }
 
-    }
-
-//  Motion Animation//
-    public void slideOutLeft(View view){
-        if (view.getVisibility()==View.GONE) {
-            AnimationSet set = new AnimationSet(true);
-            AlphaAnimation alpha = new AlphaAnimation(0,1);
-            alpha.setDuration(500);
-            alpha.setFillEnabled(true);
-            alpha.setFillBefore(false);
-            alpha.setFillAfter(false);
-            set.addAnimation(alpha);
-
-            TranslateAnimation animate = new TranslateAnimation(150,0,0,0);
-            animate.setDuration(500);
-            animate.setFillAfter(true);
-            set.addAnimation(animate);
-            view.startAnimation(set);
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.clearAnimation();
-            view.setVisibility(View.GONE);
-        }
-    }
-
-    public void slideOutDown1(View view){
-        if (view.getVisibility()==View.GONE) {
-            AnimationSet set = new AnimationSet(true);
-            AlphaAnimation alpha = new AlphaAnimation(0,1);
-            alpha.setDuration(500);
-            alpha.setFillEnabled(true);
-            alpha.setFillBefore(false);
-            alpha.setFillAfter(false);
-            set.addAnimation(alpha);
-
-            TranslateAnimation animate = new TranslateAnimation(100,0,-60,0);
-            animate.setDuration(500);
-            animate.setFillAfter(true);
-            set.addAnimation(animate);
-            view.startAnimation(set);
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.clearAnimation();
-            view.setVisibility(View.GONE);
-        }
-    }
-
-    public void slideOutDown2(View view){
-        if (view.getVisibility()==View.GONE) {
-            AnimationSet set = new AnimationSet(true);
-            AlphaAnimation alpha = new AlphaAnimation(0,1);
-            alpha.setDuration(500);
-            alpha.setFillEnabled(true);
-            alpha.setFillBefore(false);
-            alpha.setFillAfter(false);
-            set.addAnimation(alpha);
-
-            TranslateAnimation animate = new TranslateAnimation(60,0,-100,0);
-            animate.setDuration(500);
-            animate.setFillAfter(true);
-            set.addAnimation(animate);
-            view.startAnimation(set);
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.clearAnimation();
-            view.setVisibility(View.GONE);
-        }
-    }
-
-    public void slideOutDown(View view){
-            if (view.getVisibility()==View.GONE) {
-                AnimationSet set = new AnimationSet(true);
-                AlphaAnimation alpha = new AlphaAnimation(0,1);
-                alpha.setDuration(500);
-                alpha.setFillEnabled(true);
-                alpha.setFillBefore(false);
-                alpha.setFillAfter(false);
-                set.addAnimation(alpha);
-
-                TranslateAnimation animate = new TranslateAnimation(0,0,-150,0);
-                animate.setDuration(500);
-                animate.setFillAfter(true);
-                set.addAnimation(animate);
-                view.startAnimation(set);
-                view.setVisibility(View.VISIBLE);
-            } else {
-                view.clearAnimation();
-                view.setVisibility(View.GONE);
-            }
-        }
-
-    private void logout() {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(WeatherDisplayActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
     }
 
     private Location processCity(String city) {
