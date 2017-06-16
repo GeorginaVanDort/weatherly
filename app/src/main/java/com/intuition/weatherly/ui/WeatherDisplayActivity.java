@@ -13,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -59,6 +62,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     private String mHomeLoc;
     private String mIconUrl;
 
+
     @BindView(R.id.cityTextView) TextView mCityTextView;
     @BindView(R.id.temp_text_view) TextView mTempTextView;
     @BindView(R.id.summaryText) TextView mSummaryText;
@@ -72,6 +76,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     @BindView(R.id.weatherFav) ImageView mWeatherFav;
     @BindView(R.id.weatherHomeCity) ImageView mWeatherHomeCity;
     @BindView(R.id.weatherLogout) ImageView mWeatherLogout;
+
 
 
     @Override
@@ -196,12 +201,23 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         }
     }
 
+
+//  Motion Animation//
     public void slideOutLeft(View view){
         if (view.getVisibility()==View.GONE) {
+            AnimationSet set = new AnimationSet(true);
+            AlphaAnimation alpha = new AlphaAnimation(0,1);
+            alpha.setDuration(500);
+            alpha.setFillEnabled(true);
+            alpha.setFillBefore(false);
+            alpha.setFillAfter(false);
+            set.addAnimation(alpha);
+
             TranslateAnimation animate = new TranslateAnimation(150,0,0,0);
             animate.setDuration(500);
             animate.setFillAfter(true);
-            view.startAnimation(animate);
+            set.addAnimation(animate);
+            view.startAnimation(set);
             view.setVisibility(View.VISIBLE);
         } else {
             view.clearAnimation();
@@ -211,10 +227,19 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
 
     public void slideOutDown1(View view){
         if (view.getVisibility()==View.GONE) {
-            TranslateAnimation animate = new TranslateAnimation(150,0,0,30);
+            AnimationSet set = new AnimationSet(true);
+            AlphaAnimation alpha = new AlphaAnimation(0,1);
+            alpha.setDuration(500);
+            alpha.setFillEnabled(true);
+            alpha.setFillBefore(false);
+            alpha.setFillAfter(false);
+            set.addAnimation(alpha);
+
+            TranslateAnimation animate = new TranslateAnimation(100,0,-60,0);
             animate.setDuration(500);
             animate.setFillAfter(true);
-            view.startAnimation(animate);
+            set.addAnimation(animate);
+            view.startAnimation(set);
             view.setVisibility(View.VISIBLE);
         } else {
             view.clearAnimation();
@@ -224,10 +249,19 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
 
     public void slideOutDown2(View view){
         if (view.getVisibility()==View.GONE) {
-            TranslateAnimation animate = new TranslateAnimation(30,0,-30,0);
+            AnimationSet set = new AnimationSet(true);
+            AlphaAnimation alpha = new AlphaAnimation(0,1);
+            alpha.setDuration(500);
+            alpha.setFillEnabled(true);
+            alpha.setFillBefore(false);
+            alpha.setFillAfter(false);
+            set.addAnimation(alpha);
+
+            TranslateAnimation animate = new TranslateAnimation(60,0,-100,0);
             animate.setDuration(500);
             animate.setFillAfter(true);
-            view.startAnimation(animate);
+            set.addAnimation(animate);
+            view.startAnimation(set);
             view.setVisibility(View.VISIBLE);
         } else {
             view.clearAnimation();
@@ -237,10 +271,19 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
 
     public void slideOutDown(View view){
             if (view.getVisibility()==View.GONE) {
-                TranslateAnimation animate = new TranslateAnimation(0,0,-30,0);
+                AnimationSet set = new AnimationSet(true);
+                AlphaAnimation alpha = new AlphaAnimation(0,1);
+                alpha.setDuration(500);
+                alpha.setFillEnabled(true);
+                alpha.setFillBefore(false);
+                alpha.setFillAfter(false);
+                set.addAnimation(alpha);
+
+                TranslateAnimation animate = new TranslateAnimation(0,0,-150,0);
                 animate.setDuration(500);
                 animate.setFillAfter(true);
-                view.startAnimation(animate);
+                set.addAnimation(animate);
+                view.startAnimation(set);
                 view.setVisibility(View.VISIBLE);
             } else {
                 view.clearAnimation();
