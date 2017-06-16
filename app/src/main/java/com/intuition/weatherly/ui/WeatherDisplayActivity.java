@@ -154,6 +154,10 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         mTimeLabel.setOnClickListener(this);
         mMapLink.setOnClickListener(this);
         mWeatherMenu.setOnClickListener(this);
+        mWeatherAddCity.setOnClickListener(this);
+        mWeatherFav.setOnClickListener(this);
+        mWeatherHomeCity.setOnClickListener(this);
+        mWeatherLogout.setOnClickListener(this);
     }
 
 
@@ -199,8 +203,25 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
             slideOutDown(mWeatherLogout);
 
         }
-    }
+        if (v == mWeatherAddCity) {
+            Intent intent = new Intent(WeatherDisplayActivity.this, MainActivity.class);
+            startActivity(intent);
+            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "true").apply();
+        }
+        if (v == mWeatherFav) {
+            Intent intent = new Intent(WeatherDisplayActivity.this, FavoriteLocationsActivity.class);
+            startActivity(intent);
+        }
+        if (v == mWeatherHomeCity) {
+            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "").apply();
+            Intent intent = new Intent(WeatherDisplayActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+        if (v == mWeatherLogout) {
+            logout();
+        }
 
+    }
 
 //  Motion Animation//
     public void slideOutLeft(View view){
@@ -290,40 +311,6 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
                 view.setVisibility(View.GONE);
             }
         }
-
-
-    //Set Up Menu//
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    //Menu onClicks//
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_logout) {
-            logout();
-            return true;
-        }
-        if (id == R.id.add_city) {
-            Intent intent = new Intent(WeatherDisplayActivity.this, MainActivity.class);
-            startActivity(intent);
-            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "true").apply();
-        }
-        if (id == R.id.saved_locs) {
-            Intent intent = new Intent(WeatherDisplayActivity.this, FavoriteLocationsActivity.class);
-            startActivity(intent);
-        }
-        if (id == R.id.home_city) {
-            mEditor.putString(Constants.PREFERENCES_NEW_CITY, "").apply();
-            Intent intent = new Intent(WeatherDisplayActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     private void logout() {
         FirebaseAuth.getInstance().signOut();
