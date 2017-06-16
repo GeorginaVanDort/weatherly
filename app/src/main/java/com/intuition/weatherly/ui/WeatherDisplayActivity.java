@@ -1,14 +1,22 @@
 package com.intuition.weatherly.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import android.support.annotation.LayoutRes;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -61,7 +69,9 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     private String mCity;
     private String mHomeLoc;
     private String mIconUrl;
-
+    private GradientDrawable mGradient;
+    private int[] mColors;
+    private ConstraintLayout mView;
 
     @BindView(R.id.cityTextView) TextView mCityTextView;
     @BindView(R.id.temp_text_view) TextView mTempTextView;
@@ -71,8 +81,6 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     @BindView(R.id.degreesTextView) TextView mDegrees;
     @BindView(R.id.homeView) ImageView mHomeView;
     @BindView(R.id.mapLink) ImageView mMapLink;
-
-
 
 
     @Override
@@ -135,13 +143,18 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
                     public void run() {
                         mTempTextView.setText(mForecast.getTemp());
                         mSummaryText.setText(mForecast.getSummary());
-                        if (mForecast.getRainForecasts()==null){
+                        if (mForecast.getRainForecasts()==null) {
                             mGetRainText.setVisibility(View.GONE);
                         }
                     }
                 });
             }
         });
+
+        mColors = getColors();
+
+        mGradient = (GradientDrawable) getDrawable(R.drawable.gradient);
+        mGradient.setColors(mColors);
 
 
         //Set onclick listener//
@@ -150,6 +163,13 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         mTimeLabel.setOnClickListener(this);
         mMapLink.setOnClickListener(this);
 
+    }
+
+    private int[] getColors() {
+        int [] colors = new int[2];
+        colors[0] = 0xffff582d;
+        colors[1] = 0xfffec611;
+        return colors;
     }
 
 
