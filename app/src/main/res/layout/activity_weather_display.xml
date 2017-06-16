@@ -9,7 +9,7 @@
     tools:context="com.intuition.weatherly.ui.WeatherDisplayActivity">
 
     <fragment
-        android:id="@+id/fooFragment"
+        android:id="@+id/menuFragment"
         android:name="com.intuition.weatherly.ui.Menu"
         android:layout_width="116dp"
         android:layout_height="wrap_content"

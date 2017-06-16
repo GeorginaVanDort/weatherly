@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,8 +59,8 @@ public class Menu extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         DatabaseReference mLocationRef;
-        SharedPreferences mSharedPreferences = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor mEditor=  mSharedPreferences.edit();
+        SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor mEditor = mSharedPreferences.edit();
 
         if (v == mWeatherMenu) {
             slideOutLeft(mWeatherAddCity);
