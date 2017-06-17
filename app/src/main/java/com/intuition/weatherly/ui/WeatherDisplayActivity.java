@@ -47,6 +47,7 @@ import org.parceler.Parcels;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,9 +70,7 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
     private String mCity;
     private String mHomeLoc;
     private String mIconUrl;
-    private GradientDrawable mGradient;
-    private int[] mColors;
-    private ConstraintLayout mView;
+    private int mTemp;
 
     @BindView(R.id.cityTextView) TextView mCityTextView;
     @BindView(R.id.temp_text_view) TextView mTempTextView;
@@ -120,7 +119,6 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
         if (mHomeLoc.equals(mCity)){
             mHomeView.setVisibility(View.VISIBLE);
         }
-
         mLocation = processCity(mCity);
 
         //Make api call//
@@ -136,26 +134,29 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
             public void onResponse(Call call, Response response) throws IOException {
                 //Process Response Data//
                 mForecast = ForecastService.processResults(response);
-
+                mTemp = mForecast.getTemp();
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mTempTextView.setText(mForecast.getTemp());
+                        GradientDrawable background = (GradientDrawable) getDrawable(R.drawable.gradient);
+                        int[] bkcolors = background.getColors();
+                        int[] colors = getColors(mTemp);
+                        background.setColors(colors);
+                        if (!Arrays.equals(bkcolors, colors)) {
+                            recreate();
+                        }
+
+                        mTempTextView.setText(mForecast.getTemp()+"");
                         mSummaryText.setText(mForecast.getSummary());
                         if (mForecast.getRainForecasts()==null) {
                             mGetRainText.setVisibility(View.GONE);
                         }
                     }
+
                 });
             }
         });
-
-        mColors = getColors();
-
-        mGradient = (GradientDrawable) getDrawable(R.drawable.gradient);
-        mGradient.setColors(mColors);
-
 
         //Set onclick listener//
         mGetRainText.setOnClickListener(this);
@@ -165,10 +166,29 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
 
     }
 
-    private int[] getColors() {
-        int [] colors = new int[2];
-        colors[0] = 0xffff582d;
-        colors[1] = 0xfffec611;
+    private int[] getColors(int temp) {
+        int[] colors = new int[2];
+
+        if (temp >90) {
+            colors[0] = 0xff800000;
+            colors[1] = 0xffff582d;
+        }
+        else if (temp >80) {
+            colors[0] = 0xffff582d;
+            colors[1] = 0xfffec611;
+        }
+        else if (temp >70) {
+            colors[0] = 0xff09ae95;
+            colors[1] = 0xffe3ee89;
+        }
+        else if (temp >=60) {
+            colors[0] = 0xff53ab45;
+            colors[1] = 0xff76d2f1;
+        }
+        else if (temp <60) {
+            colors[0] = 0xffc6e2ff;
+            colors[1] = 0xff76d2f1;
+        }
         return colors;
     }
 
@@ -258,6 +278,11 @@ public class WeatherDisplayActivity extends AppCompatActivity implements View.On
             mLatitude = 45.523062;
             mAddress = "400 SW 6th Ave #800";
             mIconUrl = "http://adamwhitcroft.com/offscreen/img/PNG/sydney.png";
+        }if (mCity.equals("San Francisco")) {
+            mLongitude = -122.435123;
+            mLatitude = 37.762074;
+            mAddress = "429 Castro St, San Francisco, CA 94114";
+            mIconUrl = "http://adamwhitcroft.com/offscreen/img/PNG/san-francisco.png";
         }
         Location location = new Location(mCity, mAddress, mIconUrl, mLatitude, mLongitude);
         return location;

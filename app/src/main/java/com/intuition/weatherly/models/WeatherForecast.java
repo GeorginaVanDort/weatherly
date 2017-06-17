@@ -50,8 +50,8 @@ public class WeatherForecast {
         this.mSummary = mSummary;
     }
 
-    public String getTemp() {
-        return (int)Math.round(mTemp) + "";
+    public int getTemp() {
+        return (int)Math.round(mTemp);
     }
 
     public void setTemp(Double mTemp) {
