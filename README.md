@@ -1,8 +1,8 @@
-#Weatherly
+# Weatherly
 
 Weekly Independent project for Android. Stage FOUR.
 
-Welcome to the Weatherly App. Now with dynamic graidents and nifti animations!
+Welcome to the Weatherly App. Now with dynamic gradients and nifti animations!
 
 Users are asked to Log in or create a new account. This process uses the Firebase Authentication protocol.
 
